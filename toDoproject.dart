@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 //function Add task from AddTask branch
 void addTask(List<Map<String, String>> taskList, String task, String dueDate) {
   taskList.add({'task': task, 'dueDate': dueDate});
@@ -39,9 +38,25 @@ void saveTasksToFile(List<Map<String, String>> taskList, String filename) {
   sink.close();
 }
 
+//function Load Tasks from file from SaveTaskstoFile branch 
+List<Map<String, String>> loadTasksFromFile(String filename) {
+  var taskList = <Map<String, String>>[];
+  var file = File(filename);
+  try {
+    var lines = file.readAsLinesSync();
+    for (var line in lines) {
+      var parts = line.split(',');
+      if (parts.length == 2) {
+        taskList.add({'task': parts[0], 'dueDate': parts[1]});
+      }
+    }
+  } catch (e) {
+    print('Error reading file: $e');
+  }
+  return taskList;
+}
 
 
 void main(List<String> args) {
   
 }
-
