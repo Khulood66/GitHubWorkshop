@@ -1,3 +1,5 @@
+import 'dart:io';
+
 
 //function Add task from AddTask branch
 void addTask(List<Map<String, String>> taskList, String task, String dueDate) {
@@ -27,6 +29,15 @@ void displayTasks(List<Map<String, String>> taskList) {
   }
 }
 
+//function Save Tasks to file from SaveTaskstoFile branch 
+void saveTasksToFile(List<Map<String, String>> taskList, String filename) {
+  var file = File(filename);
+  var sink = file.openWrite();
+  for (var task in taskList) {
+    sink.write('${task['task']},${task['dueDate']}\n');
+  }
+  sink.close();
+}
 
 
 
